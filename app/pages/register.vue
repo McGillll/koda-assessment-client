@@ -213,7 +213,7 @@ const submit = async () => {
 
     try {
         await register(form)
-        await navigateTo('/projects')
+        await navigateTo('/dashboard')
     } catch {
     }
 }

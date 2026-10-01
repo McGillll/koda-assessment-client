@@ -15,6 +15,14 @@
 
         <nav class="mt-6 flex-1 space-y-1 overflow-y-auto px-3 pb-6" aria-label="Main">
             <NuxtLink
+                to="/dashboard"
+                :class="navItemClass(onDashboard)"
+                :aria-current="onDashboard ? 'page' : undefined"
+            >
+                <LayoutDashboard aria-hidden="true" class="size-4.5 shrink-0" />
+                Dashboard
+            </NuxtLink>
+            <NuxtLink
                 to="/projects"
                 :class="navItemClass(onProjectsList)"
                 :aria-current="onProjectsList ? 'page' : undefined"
@@ -57,12 +65,14 @@
 </template>
 
 <script setup lang="ts">
-import { FolderKanban, LoaderCircle, LogOut, Plus } from '@lucide/vue'
+import { FolderKanban, LayoutDashboard, LoaderCircle, LogOut, Plus } from '@lucide/vue'
 import { cn } from '@/lib/utils'
 
 const route = useRoute()
 const { user, logout } = useAuth()
 const loggingOut = ref(false)
+
+const onDashboard = computed(() => route.path === '/dashboard')
 
 const onProjectsList = computed(() => route.path === '/projects')
 

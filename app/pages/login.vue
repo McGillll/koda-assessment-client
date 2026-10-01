@@ -107,7 +107,7 @@ const submit = async () => {
 
     try {
         await login(form)
-        await navigateTo('/projects')
+        await navigateTo('/dashboard')
     } catch {
     }
 }

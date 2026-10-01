@@ -71,6 +71,11 @@ export interface SortOption {
     label: string
 }
 
+export interface StatusSummaryItem extends ProjectOption<ProjectStatus> {
+    count: number
+    percent: number
+}
+
 export interface ProjectFilterSelection {
     status: string
     priority: string
