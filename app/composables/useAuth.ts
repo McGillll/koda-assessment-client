@@ -21,8 +21,8 @@ export const useAuth = () => {
     const setError = (exception: unknown) => {
         const apiError = exception as APIError
 
-        error.value = apiError.data?.message || 'Something went wrong.'
         fieldErrors.value = apiError.data?.data || {}
+        error.value = Object.keys(fieldErrors.value).length ? null : apiError.data?.message || 'Something went wrong.'
     }
 
     const clearErrors = (field?: string) => {
@@ -112,6 +112,13 @@ export const useAuth = () => {
         }
     }
 
+    const expireSession = async () => {
+        token.value = null
+        user.value = null
+
+        await navigateTo('/login')
+    }
+
     return {
         token,
         user,
@@ -123,5 +130,6 @@ export const useAuth = () => {
         login,
         fetchUser,
         logout,
+        expireSession,
     }
 }

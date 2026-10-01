@@ -25,8 +25,8 @@
                 @blur="touched.password = true"
             />
 
-            <AuthAlert v-if="error">
-                {{ error }}
+            <AuthAlert v-if="formError">
+                {{ formError }}
             </AuthAlert>
 
             <Button
@@ -73,11 +73,9 @@ const touched = reactive({
     password: false,
 })
 
-const emailError = computed(() => {
-    if (fieldErrors.value.email?.[0]) {
-        return fieldErrors.value.email[0]
-    }
+const formError = computed(() => error.value || Object.values(fieldErrors.value)[0]?.[0] || '')
 
+const emailError = computed(() => {
     if (!touched.email) {
         return ''
     }
@@ -90,10 +88,6 @@ const emailError = computed(() => {
 })
 
 const passwordError = computed(() => {
-    if (fieldErrors.value.password?.[0]) {
-        return fieldErrors.value.password[0]
-    }
-
     if (!touched.password) {
         return ''
     }
@@ -113,7 +107,7 @@ const submit = async () => {
 
     try {
         await login(form)
-        await navigateTo('/dashboard')
+        await navigateTo('/projects')
     } catch {
     }
 }

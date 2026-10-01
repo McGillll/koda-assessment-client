@@ -18,4 +18,8 @@
 
 <script setup lang="ts">
 import { ArrowRight } from '@lucide/vue'
+
+definePageMeta({
+    middleware: 'guest',
+})
 </script>
